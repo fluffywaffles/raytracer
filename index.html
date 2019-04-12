@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>01_RayTracing: Week1_RESCUE</title>
+  </head>
+  <body onload="main()">
+    <canvas id="webgl">
+    Please use a browser that supports "canvas"
+    </canvas>
+  <p>
+    <!-- Make a 'div' element to hold changeable HTML made in our JavaScript file;
+       (where? look inside main(), inside its 'tick()' function, where we
+       display the 'current angle' value.
+    -->
+    <div id=help style='display: none; position: absolute; top: 5px; left: 5px; width: calc(100% - 10px); background: white; border: 3px solid green; padding: 5px; box-sizing: border-box;'>
+
+      <h3>Movement Direction Diagram</h3>
+      <pre>
+          +y  +z
+           | /
+     -x ___|/___ +x
+          /|
+         / |
+       -z  -y
+       </pre>
+
+      <hr>
+
+      <div style='width: 50%; float: left'>
+        <h3>Camera Eye Movement</h3>
+        <p><b>up</b>: move +0.1 z</p>
+        <p><b>down</b>: move -0.1 z</p>
+        <p><b>left</b>: move -0.1 x</p>
+        <p><b>right</b>: move +0.1 x</p>
+        <p><b>ctrl</b>: move -0.1 y</p>
+        <p><b>shift</b>: move +0.1 y</p>
+      </div>
+
+      <div style='width: 50%; float: left'>
+        <h3>Camera Look Point Movement</h3>
+        <p><b>w</b>: move -0.1 z</p>
+        <p><b>a</b>: move -0.1 x</p>
+        <p><b>s</b>: move +0.1 z</p>
+        <p><b>d</b>: move +0.1 x</p>
+        <p><b>q</b>: move -0.1 y</p>
+        <p><b>e</b>: move +0.1 y</p>
+      </div>
+
+      <hr>
+
+      <h3>Trace Controls</h3>
+      <b>t</b>: render
+
+    </div>
+    <div id='tracingStatus' style='background: red; color: yellow; display: none; position: fixed; padding: 150px 50%; left: 0; width: 100%;'>TRACING</div>
+    <!-- Next, a simple block of text:
+    -->
+    Press 't' to trace, press 'F1' for more help.
+  </p>
+    Open the JavaScript Console, please: (right-click-->'Inspect Element'-->'Console' tab) <br>
+    Try all the keys on the keyboard...
+    <div id='Result'> (hit keys: Look here...) </div> <br>
+    <div id='controls'>
+      <fieldset style='width: 120px; float: left'>
+        <legend>Scene Selection</legend>
+        <select id='scene' style='display: block; margin: 0 auto;'>
+          <option value='scene1'>Scene 1</option>
+          <option value='scene2'>Scene 2</option>
+          <option value='scene3'>Scene 3</option>
+          <option value='scene4'>Scene 4</option>
+        </select>
+      </fieldset>
+      <fieldset style='float: left'>
+        <legend>Antialiasing (1+)</legend>
+        <input type="number" id='antialiasingMode' min='1' step='1' style='width: 50px; margin: 0 auto; display: block;'>
+      </fieldset>
+      <fieldset style='float: left'>
+        <legend>Reflection Depth (0+)</legend>
+        <input type="number" min='0' step='1' style='width: 50px; margin: 0 auto; display: block;' id='reflectionDepth'>
+      </fieldset>
+      <fieldset style='float: left'>
+        <legend>Camera Resolution</legend>
+        <select id='cameraResolution' style='display: block; margin: 0 auto;'>
+          <option value='256'>256</option>
+          <option value='512'>512</option>
+          <option value='1024'>1024</option>
+        </select>
+      </fieldset>
+      <fieldset id='lights' style='clear: both'>
+        <legend>Lights</legend>
+        <input type='checkbox' id='light1on' checked>
+        <label>Light 1 On/Off</label>
+        <br>
+        <input type='checkbox' id='light2on' checked>
+        <label>Light 2 On/Off</label>
+        <br>
+        <label>Light one position (x, y, z)</label>
+        <input type='text' id='light1x'>
+        <input type='text' id='light1y'>
+        <input type='text' id='light1z'>
+        <br>
+        <label>Light two position (x, y, z)</label>
+        <input type='text' id='light2x'>
+        <input type='text' id='light2y'>
+        <input type='text' id='light2z'>
+      </fieldset>
+    </div>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-quat.js"></script>   <!-- JT modified to add quaternions -->
+  <script src="../lib/glmatrix.js"></script>       <!-- SEE: http://glmatrix.net/ fast vector/matrix lib for webGL  -->
+  <script src='Buffer.js'></script>
+  <script src="Camera.js"></script>
+  <script src="Hit.js"></script>
+  <script src="Light.js"></script>
+  <script src="Material.js"></script>
+  <script src="PhongMaterial.js"></script>
+  <script src="Ray.js"></script>
+  <script src="Scene.js"></script>
+  <script src="Shape.js"></script>
+  <script src="Sphere.js"></script>
+  <script src="Cube.js"></script>
+  <script src="Cylinder.js"></script>
+  <script src="Cone.js"></script>
+  <script src="Reactor.js"></script>
+  <script src="Plane.js"></script>
+  <script src="materialDefinitions.js"></script>
+  <script src="scene1.js"></script>
+  <script src="scene2.js"></script>
+  <script src="scene3.js"></script>
+  <script src="scene4.js"></script>
+  <!--<script src="camRays.js"></script>-->
+  <script src="traceWeek01_RESCUE.js"></script>
+  <script src="userControls.js"></script>
+  </body>
+</html>
